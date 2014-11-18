@@ -1,0 +1,11 @@
+[user]
+	name = Xiaocan Li
+	email = phyxiaolee@gmail.com
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	up = rebase
+	ci = commit
+[core]
+	editor = vim
