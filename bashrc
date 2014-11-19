@@ -14,10 +14,9 @@ export BLAS=$HOME/local/BLAS/libfblas.a
 export LAPACK=$HOME/local/lapack-3.5.0
 export openjp2=$HOME/local/usr/local/lib
 
-# export PATH=$PATH:/home/xli/local/epd_free-7.3-2-rh5-x86_64/bin:/home/xli/local/smlnj/bin
-export PATH=$PATH:/home/xli/local/cmake-2.8.12.2/bin
+export PATH=$PATH:$HOME/local/cmake-2.8.12.2/bin
 export PATH=$PATH:/usr/local/texlive/2013/bin/x86_64-linux
-export PATH=$PATH:/home/xli/local/libtool-2.4.2/bin
+export PATH=$PATH:$HOME/local/libtool-2.4.2/bin
 
 export PATH=$HOME/local/visit2_7_0.linux-x86_64/bin:$PATH
 export PATH=$HOME/anaconda/bin:$PATH
