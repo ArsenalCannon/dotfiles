@@ -41,6 +41,12 @@ Plugin 'sjl/gundo.vim'
 Plugin 'rking/ag.vim'
 " Fuzzy file, buffer, mru, tag, etc finder
 Plugin 'kien/ctrlp.vim'
+" An improved version of latex-suite
+Plugin 'gerw/vim-latex-suite'
+" Scala in vim
+Plugin 'derekwyatt/vim-scala'
+" Browse Hacker News inside Vim
+Plugin 'ryanss/vim-hackernews'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -59,12 +65,6 @@ filetype plugin indent on    " required
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
-
-" Colors.
-"colorscheme desertEx
-colorscheme badwolf
-"colorscheme molokai
-syntax enable " enable syntax processing.
 
 " Spaces & Tabs
 set tabstop=4           " number of visual spaces per TAB
@@ -114,7 +114,7 @@ nnoremap gV `[v`]
 " Leader Shortcuts
 let mapleader=","       " leader is comma
 " jk is escape
-inoremap jk <esc>
+"inoremap jk <esc>
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 " edit vimrc/zshrc/bashrc and load vimrc bindings
@@ -172,6 +172,7 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 map <Leader>lx :<C-U>call SetXeTex()<CR>
 set iskeyword+=:
+let g:tex_flavor='latex'
 
 function! FixLastSpellingError()
     normal! mm[s1z=`m
@@ -185,5 +186,11 @@ set showmode
 
 " Git commit message settings
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
+" Colors.
+syntax enable " enable syntax processing.
+"colorscheme desertEx
+colorscheme badwolf
+"colorscheme molokai
 
 nnoremap <leader>sop :source %<cr>
