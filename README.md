@@ -1,1 +1,1 @@
-Configuration settings for daily usage.
+# Configuration settings for daily usage.
