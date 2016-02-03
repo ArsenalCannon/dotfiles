@@ -9,3 +9,5 @@
 	ci = commit
 [core]
 	editor = vim
+[credential]
+	helper = cache
