@@ -30,8 +30,10 @@ Plugin 'scrooloose/nerdtree'
 " Vim motion on speed
 Plugin 'Lokaltog/vim-easymotion'
 " The ultimate vim statusline utility. DEPRECATED in favor of
-" Lokaltog/powerline
-Plugin 'Lokaltog/powerline'
+" " Lokaltog/powerline
+" Plugin 'Lokaltog/powerline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " one colorscheme pack to rule them all!
 Plugin 'flazz/vim-colorschemes'
 " Vim plugin to visualize your Vim undo tree
@@ -49,8 +51,8 @@ Plugin 'nvie/vim-flake8'
 Plugin 'tpope/vim-surround'
 " comment stuff out
 Plugin 'tpope/vim-commentary'
-"" A code-completion engine for Vim
-"Plugin 'Valloric/YouCompleteMe'
+" " A code-completion engine for Vim
+" Plugin 'Valloric/YouCompleteMe'
 " Light Vim color scheme inspired by Google's Material Design
 Plugin 'NLKNguyen/papercolor-theme'
 " A vim plugin to display the indention levels with thin vertical lines 
@@ -58,6 +60,13 @@ Plugin 'Yggdroot/indentLine'
 " A modern vim plugin for editing LaTeX files.
 " Plugin 'lervag/vimtex'
 Plugin 'jscappini/material.vim'
+" snipMate.vim aims to be a concise vim script that implements some of
+" TextMate's snippets features in Vim
+Plugin 'msanders/snipmate.vim'
+" Vim script for text filtering and alignment
+Plugin 'godlygeek/tabular'
+" Perform all your vim insert mode completions with Tab
+Plugin 'ervandew/supertab'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -88,6 +97,7 @@ set autoindent
 
 " UI Config
 set number              " show line numbers
+set relativenumber       " show relative line numbers
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 set wildmenu            " visual auto complete for command menu
@@ -149,18 +159,54 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 " save session
 "nnoremap <leader>s :mksession<CR>
 
-" Powerline settings
+" " Powerline settings
+" set encoding=utf-8 " Necessary to show Unicode glyphs
+" python import sys; sys.path.append("$HOME/anaconda/lib/python2.7/site-packages/")
+" python from powerline.vim import setup as powerline_setup
+" python powerline_setup()
+" python del powerline_setup
+" set laststatus=2 " Always display the statusline in all windows
+" " set showtabline=2 " Always display the tabline, even if there is only one tab
+" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+" set t_Co=256
+" let g:Powerline_symbols = 'fancy'
+" set fillchars+=stl:\ ,stlnc:\
+
+" vim-airline setting
 set encoding=utf-8 " Necessary to show Unicode glyphs
-python import sys; sys.path.append("/home/xli/anaconda/lib/python2.7/site-packages/")
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-set laststatus=2 " Always display the statusline in all windows
-" set showtabline=2 " Always display the tabline, even if there is only one tab
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-set t_Co=256
-let g:Powerline_symbols = 'fancy'
-set fillchars+=stl:\ ,stlnc:\
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+set laststatus=2
+" let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+let g:airline_symbols = {}
+endif
+
+" " unicode symbols
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline_symbols.crypt = '🔒'
+" let g:airline_symbols.linenr = '␊'
+" let g:airline_symbols.linenr = '␤'
+" let g:airline_symbols.linenr = '¶'
+" let g:airline_symbols.branch = '⎇'
+" let g:airline_symbols.paste = 'ρ'
+" let g:airline_symbols.paste = 'Þ'
+" let g:airline_symbols.paste = '∥'
+" let g:airline_symbols.notexists = '∄'
+" let g:airline_symbols.whitespace = 'Ξ'
+
+" powerline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
 
 " CtrlP settings
 let g:ctrlp_map = '<c-p>'
@@ -194,8 +240,9 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 map <Leader>lx :<C-U>call SetXeTex()<CR>
 set iskeyword+=:
- let g:tex_flavor='latex'
- let g:Tex_UseMakefile=0
+let g:tex_flavor='latex'
+let g:Tex_UseMakefile=0
+" let g:Tex_ViewRule_pdf='mupdf-x11'
 
 function! FixLastSpellingError()
     normal! mm[s1z=`m
