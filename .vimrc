@@ -1,87 +1,36 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Make sure you use single quotes
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plug 'tpope/vim-fugitive'             " A Git wrapper so awesome, it should be illegal
+Plug 'airblade/vim-gitgutter'         " shows git changes in gutter
+Plug 'wincent/Command-T'              " Fast file navigation for VIM
+Plug 'scrooloose/nerdtree'            " A tree explorer plugin for vim
+Plug 'Lokaltog/vim-easymotion'        " Vim motion on speed
+Plug 'vim-airline/vim-airline'        " lean & mean status/tabline for vim that's light as air
+Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline
+Plug 'flazz/vim-colorschemes'         " one colorscheme pack to rule them all!
+Plug 'sjl/gundo.vim'                  " Vim plugin to visualize your Vim undo tree
+Plug 'rking/ag.vim'                   " Vim plugin for the_silver_searcher ag
+Plug 'kien/ctrlp.vim'                 " Fuzzy file, buffer, mru, tag, etc finder
+Plug 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
+Plug 'nvie/vim-flake8'                " Flake8 plugin for Vim
+Plug 'tpope/vim-surround'             " surround.vim: quoting/parenthesizing made simple
+Plug 'tpope/vim-commentary'           " comment stuff out
+Plug 'Yggdroot/indentLine'            " A vim plugin to display the indention levels with thin vertical lines
+Plug 'godlygeek/tabular'              " Vim script for text filtering and alignment
+Plug 'junegunn/vim-easy-align'        " A Vim alignment plugin
+Plug 'JuliaEditorSupport/julia-vim'   " Vim support for Julia
+Plug 'fisadev/vim-isort'              " sort python imports
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'davidhalter/jedi-vim'           " Using the jedi autocompletion library for VIM
+Plug '~/my-prototype-plugin'          " Unmanaged plugin (manually installed and updated)
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'wincent/Command-T'
-"" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-"" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
-" A tree explorer plugin for vim
-Plugin 'scrooloose/nerdtree'
-" Vim motion on speed
-Plugin 'Lokaltog/vim-easymotion'
-" The ultimate vim statusline utility. DEPRECATED in favor of
-" " Lokaltog/powerline
-" Plugin 'Lokaltog/powerline'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" one colorscheme pack to rule them all!
-Plugin 'flazz/vim-colorschemes'
-" Vim plugin to visualize your Vim undo tree
-Plugin 'sjl/gundo.vim'
-" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module
-" / CLI script 'ack'
-Plugin 'rking/ag.vim'
-" Fuzzy file, buffer, mru, tag, etc finder
-Plugin 'kien/ctrlp.vim'
-" Seamless navigation between tmux panes and vim splits
-Plugin 'christoomey/vim-tmux-navigator'
-" Flake8 plugin for Vim
-Plugin 'nvie/vim-flake8'
-" surround.vim: quoting/parenthesizing made simple
-Plugin 'tpope/vim-surround'
-" comment stuff out
-Plugin 'tpope/vim-commentary'
-" " A code-completion engine for Vim
-" Plugin 'Valloric/YouCompleteMe'
-" Light Vim color scheme inspired by Google's Material Design
-Plugin 'NLKNguyen/papercolor-theme'
-" A vim plugin to display the indention levels with thin vertical lines 
-Plugin 'Yggdroot/indentLine'
-" A modern vim plugin for editing LaTeX files.
-" Plugin 'lervag/vimtex'
-Plugin 'jscappini/material.vim'
-" snipMate.vim aims to be a concise vim script that implements some of
-" TextMate's snippets features in Vim
-Plugin 'msanders/snipmate.vim'
-" Vim script for text filtering and alignment
-Plugin 'godlygeek/tabular'
-" Perform all your vim insert mode completions with Tab
-Plugin 'ervandew/supertab'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Initialize plugin system
+call plug#end()
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -97,14 +46,21 @@ set autoindent
 
 " UI Config
 set number              " show line numbers
-set relativenumber       " show relative line numbers
+set relativenumber      " relative line number
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 set wildmenu            " visual auto complete for command menu
 "set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+" highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+" match OverLength /\%81v.\+/
+highlight ColorColumn ctermbg=magenta ctermfg=white guibg=#592929
+call matchadd('ColorColumn', '\%81v', 100)
+" set colorcolumn=80
+au BufNewFile,BufRead *.param set filetype=cpp
+au BufNewFile,BufRead *.tpp set filetype=cpp
+au BufNewFile,BufRead *.kernel set filetype=cpp
+au BufNewFile,BufRead *.pf set filetype=fortran
 
 " Searching
 set ignorecase          " ignore case when searching
@@ -137,13 +93,14 @@ set foldmethod=indent   " fold based on indent level
 nnoremap j gj
 nnoremap k gk
 " move to beginning/end of line
-nnoremap B ^
+" nnoremap B ^
 nnoremap E $
 "" $/^ doesn't do anything
 "nnoremap $ <nop>
 "nnoremap ^ <nop>
 " highlight last inserted text
 nnoremap gV `[v`]
+set synmaxcol=120
 
 " Leader Shortcuts
 let mapleader=","       " leader is comma
@@ -158,55 +115,6 @@ nnoremap <leader>ez :vsp ~/.zshrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " save session
 "nnoremap <leader>s :mksession<CR>
-
-" " Powerline settings
-" set encoding=utf-8 " Necessary to show Unicode glyphs
-" python import sys; sys.path.append("$HOME/anaconda/lib/python2.7/site-packages/")
-" python from powerline.vim import setup as powerline_setup
-" python powerline_setup()
-" python del powerline_setup
-" set laststatus=2 " Always display the statusline in all windows
-" " set showtabline=2 " Always display the tabline, even if there is only one tab
-" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
-" set t_Co=256
-" let g:Powerline_symbols = 'fancy'
-" set fillchars+=stl:\ ,stlnc:\
-
-" vim-airline setting
-set encoding=utf-8 " Necessary to show Unicode glyphs
-let g:airline#extensions#tabline#enabled = 0
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-set laststatus=2
-" let g:airline_powerline_fonts = 1
-if !exists('g:airline_symbols')
-let g:airline_symbols = {}
-endif
-
-" " unicode symbols
-" let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
-" let g:airline_symbols.crypt = '🔒'
-" let g:airline_symbols.linenr = '␊'
-" let g:airline_symbols.linenr = '␤'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.branch = '⎇'
-" let g:airline_symbols.paste = 'ρ'
-" let g:airline_symbols.paste = 'Þ'
-" let g:airline_symbols.paste = '∥'
-" let g:airline_symbols.notexists = '∄'
-" let g:airline_symbols.whitespace = 'Ξ'
-
-" powerline symbols
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
 
 " CtrlP settings
 let g:ctrlp_map = '<c-p>'
@@ -240,9 +148,6 @@ set shellslash
 set grepprg=grep\ -nH\ $*
 map <Leader>lx :<C-U>call SetXeTex()<CR>
 set iskeyword+=:
-let g:tex_flavor='latex'
-let g:Tex_UseMakefile=0
-" let g:Tex_ViewRule_pdf='mupdf-x11'
 
 function! FixLastSpellingError()
     normal! mm[s1z=`m
@@ -259,17 +164,9 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 
 nnoremap <leader>sop :source %<cr>
 
-" Colors.
+" Colors
 colorscheme badwolf
-" colorscheme material
-" set t_Co=256
-" colorscheme PaperColor
-" colorscheme molokai
-" colorscheme monokain
-" colorscheme summerfruit256
-" colorscheme harlequin
-" colorscheme seti
-" set background=dark
+set background=dark              " [dark or light]
 syntax enable " enable syntax processing.
 
 " Spell checking settings.
@@ -289,5 +186,35 @@ set complete+=kspell
 " Git
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-set backspace=indent,eol,start
-let g:tex_conceal = ""
+" Run code in vim
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
+" Sort python imports
+autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
+
+" Format code
+autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Tabularize
+let mapleader=','
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+  nmap <Leader>a; :Tabularize /;\zs<CR>
+  vmap <Leader>a; :Tabularize /;\zs<CR>
+endif
+
+" gitgutter
+let g:gitgutter_async=0
+set updatetime=100              " set update time for gitgutter update
+
+" isort
+let g:vim_isort_map = '<C-i>'
