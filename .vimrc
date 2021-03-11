@@ -17,7 +17,6 @@ Plug 'sjl/gundo.vim'                  " Vim plugin to visualize your Vim undo tr
 Plug 'rking/ag.vim'                   " Vim plugin for the_silver_searcher ag
 Plug 'kien/ctrlp.vim'                 " Fuzzy file, buffer, mru, tag, etc finder
 Plug 'christoomey/vim-tmux-navigator' " Seamless navigation between tmux panes and vim splits
-Plug 'nvie/vim-flake8'                " Flake8 plugin for Vim
 Plug 'tpope/vim-surround'             " surround.vim: quoting/parenthesizing made simple
 Plug 'tpope/vim-commentary'           " comment stuff out
 Plug 'Yggdroot/indentLine'            " A vim plugin to display the indention levels with thin vertical lines
@@ -25,7 +24,7 @@ Plug 'godlygeek/tabular'              " Vim script for text filtering and alignm
 Plug 'junegunn/vim-easy-align'        " A Vim alignment plugin
 Plug 'JuliaEditorSupport/julia-vim'   " Vim support for Julia
 Plug 'fisadev/vim-isort'              " sort python imports
-Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'dense-analysis/ale'             " Check syntax in Vim asynchronously and fix files, with LSP support
 Plug 'davidhalter/jedi-vim'           " Using the jedi autocompletion library for VIM
 Plug '~/my-prototype-plugin'          " Unmanaged plugin (manually installed and updated)
 
@@ -137,10 +136,10 @@ let NERDTreeIgnore = ['\.pyc$', 'build', 'venv', 'egg', 'egg-info/', 'dist','doc
 "endif
 "
 " Backups
-set backup 
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
-set backupskip=/tmp/*,/private/tmp/* 
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
+set backup
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set backupskip=/tmp/*,/private/tmp/*
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 " Vim-LaTeX settings
@@ -191,6 +190,7 @@ nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
 
 " Sort python imports
 autocmd FileType python nnoremap <LocalLeader>i :!isort %<CR><CR>
+let g:vim_isort_map = '<C-i>'
 
 " Format code
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
@@ -216,5 +216,17 @@ endif
 let g:gitgutter_async=0
 set updatetime=100              " set update time for gitgutter update
 
-" isort
-let g:vim_isort_map = '<C-i>'
+" Linting & Fixing
+let g:ale_linters = {
+      \   'python': ['flake8', 'pylint'],
+      \}
+let g:ale_fixers = {
+      \    'python': ['yapf'],
+      \}
+nmap <F10> :ALEFix<CR>
+let g:ale_fix_on_save = 1
+
+" jedi-vim
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
